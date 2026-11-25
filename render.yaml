@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: flatfinder
+    rootDir: .
+    runtime: docker
+    dockerContext: .
+    dockerfilePath: Dockerfile
+    plan: starter
+    healthCheckPath: /api/health/db
+    disk:
+      name: flatfinder-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: DEMO_MODE
+        value: true
+      - key: SQLITE_DATABASE_PATH
+        value: /var/data/flatfinder.db
+      - key: JWT_SECRET
+        generateValue: true
+      - key: SEED_TENANT_USERNAME
+        value: syahrul
+      - key: SEED_TENANT_PASSWORD
+        sync: false

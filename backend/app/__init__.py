@@ -1,0 +1,1 @@
+"""FlatFinder FastAPI application package."""
