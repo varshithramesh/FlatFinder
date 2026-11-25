@@ -1,8 +1,10 @@
 import { motion } from 'framer-motion'
-import { BedDouble, MapPin, Ruler, Save, ShieldCheck, Star } from 'lucide-react'
+import { BedDouble, MapPin, Navigation, Ruler, Save, ShieldCheck, Star } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 function PropertyCard({ property, saved, onToggleSave }) {
+  const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(property.location)}`
+
   return (
     <motion.article
       layout
@@ -56,10 +58,19 @@ function PropertyCard({ property, saved, onToggleSave }) {
           ))}
         </div>
 
-        <div className="card-actions">
+        <div className="card-actions property-card-actions">
           <Link to={`/property/${property.id}`} className="button button-dark button-small">
             View Details
           </Link>
+          <a
+            href={directionsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="button button-light button-small"
+            aria-label={`Get directions to ${property.location} in Google Maps`}
+          >
+            <Navigation size={14} /> Go to location
+          </a>
           <button type="button" className="inline-link" onClick={() => onToggleSave(property.id)}>
             {saved ? 'Saved' : 'Save'}
           </button>
